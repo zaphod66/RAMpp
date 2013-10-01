@@ -6,7 +6,7 @@ object ParserApp extends App {
 
   println("ParserApp")
   
-  val reader = new FileReader("RAM.src")
+  val reader = new FileReader("/Users/nschelle/tmp/RAM.src")
   val result = RAMparser.parseAll(RAMparser.commands, reader)
   if (result.successful) {
     val parseTree = result.get

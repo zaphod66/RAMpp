@@ -20,11 +20,11 @@ object RAMparser extends JavaTokenParsers {
 
   def writeCmd = ("write" ~ ident) ^^ { case "write"~id => WRITEcmd(id) }
 
-  def assignCmd = (ident ~ ("++" | "--")) ^^ { case id~op => ASSIGNMENTcmd(id,op) }
+  def assignCmd = (ident ~ ("++" | "--")) ^^ { case id~op => ASSIGNMENTcmd(id, op) }
 
   def ifCmd: Parser[Command] = ("if" ~ ident ~ "=" ~ "0" ~ "then" ~ commands ~ optElse ~ "end") ^^ 
                                      { case "if" ~ id ~ "=" ~ "0" ~ "then" ~ thenpart ~ elsepart ~ "end" => 
-                                       IFcmd(id,thenpart,elsepart) }
+                                       IFcmd(id, thenpart, elsepart) }
 
   def optElse: Parser[Commands] = opt("else"~commands) ^^ { case None => Commands(Nil)
                                                             case Some("else"~cmds) => cmds
