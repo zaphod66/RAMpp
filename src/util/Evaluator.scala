@@ -7,7 +7,7 @@ object Evaluator {
     if (!commands.isEmpty) {
       commands.head match {
 
-        case READcmd(myvar)  => { 
+        case READstmt(myvar)  => { 
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
           print(myvar + " ? ")
           var x = readInt()
@@ -19,12 +19,12 @@ object Evaluator {
           }
         }
 
-        case WRITEcmd(myvar) => {
+        case WRITEstmt(myvar) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
           println(myvar + " : " + ST(myvar))
         }
 
-        case ASSIGNMENTcmd(myvar, op) => {
+        case INCDECstmt(myvar, op) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
           if (op == "++") {
             ST += (myvar -> (ST(myvar)+1))
@@ -33,7 +33,7 @@ object Evaluator {
           }
         }
 
-        case IFcmd(myvar, thenPart, elsePart) => {
+        case IFstmt(myvar, thenPart, elsePart) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
           if (ST(myvar) == 0) {
             eval(thenPart.cmds)
@@ -42,7 +42,7 @@ object Evaluator {
           }
         }
 
-        case WHILEcmd(myvar, doPart) => {
+        case WHILEstmt(myvar, doPart) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
           while (ST(myvar) == 0) {
             eval(doPart.cmds)
