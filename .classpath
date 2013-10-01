@@ -2,9 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/akka-actors.jar"/>
-	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/scala-actors.jar"/>
-	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/scala-compiler.jar"/>
 	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/scala-library.jar"/>
 	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/scala-reflect.jar"/>
 	<classpathentry kind="lib" path="/Users/nschelle/Lang/Scala/scala-2.10.2/lib/scala-swing.jar"/>
