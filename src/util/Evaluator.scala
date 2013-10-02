@@ -13,7 +13,7 @@ object Evaluator {
           var x = readInt()
           if (x < 0) {
             println("***ERROR: Number cannot be negative")
-             return
+            return
           } else {
             ST += (myvar -> x)
           }
@@ -33,21 +33,27 @@ object Evaluator {
           }
         }
 
-        case IFstmt(myvar, thenPart, elsePart) => {
+        case IFstmt(myvar, value, thenPart, elsePart) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
-          if (ST(myvar) == 0) {
+          if (ST(myvar) == value) {
             eval(thenPart.cmds)
           } else {
             eval(elsePart.cmds)
           }
         }
 
-        case WHILEstmt(myvar, doPart) => {
+        case WHILEstmt(myvar, value, doPart) => {
           if (! ST.contains(myvar)) { ST += (myvar -> 0) }
-          while (ST(myvar) == 0) {
+          while (ST(myvar) == value) {
             eval(doPart.cmds)
           }
         }
+
+        case ASSIGNstmt(myvar, value) => {
+          if (! ST.contains(myvar)) { ST += (myvar -> 0) }
+          ST += (myvar -> value)
+        }
+
         case _ => println("unkown statement: " + commands.head)
       }
       eval(commands.tail)
