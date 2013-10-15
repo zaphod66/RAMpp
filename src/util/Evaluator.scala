@@ -54,6 +54,9 @@ object Evaluator {
           ST += (myvar -> value)
         }
 
+        case ENVstmt() => {
+          println("====\nENV: " + ST + "\n====")
+        }
         case _ => println("unkown statement: " + commands.head)
       }
       eval(commands.tail)

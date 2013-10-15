@@ -11,11 +11,12 @@ case class WRITEstmt(outvar: String) extends Statement
 case class READstmt(invar: String) extends Statement
 case class INCDECstmt(incvar: String, action: String) extends Statement
 case class ASSIGNstmt(assvar: String, value: Int) extends Statement
+case class ENVstmt() extends Statement
 
 object RAMparser extends JavaTokenParsers {
   def commands = rep(command) ^^ { case cmds => Statements(cmds) }
 
-  def command  = ifCmd | readCmd | writeCmd | incdecCmd | whileCmd | assignCmd | failure("unexpected symbol")
+  def command  = ifCmd | readCmd | writeCmd | incdecCmd | whileCmd | assignCmd | envCmd | failure("unexpected symbol")
 
   def readCmd =  ("read" ~ ident)  ^^ { case "read"~id  => READstmt(id) }
 
@@ -36,4 +37,7 @@ object RAMparser extends JavaTokenParsers {
 
   def assignCmd: Parser[Statement] = ("set" ~ ident ~ "=" ~ wholeNumber) ^^
                                      { case "set" ~ id ~ "=" ~ value => ASSIGNstmt(id, value.toInt) }
+  
+  def envCmd: Parser[Statement] = ("print_env") ^^
+                                  { _ => ENVstmt() }
 }
